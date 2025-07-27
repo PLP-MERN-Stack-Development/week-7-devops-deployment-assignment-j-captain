@@ -179,7 +179,7 @@ npm start
   const socket = io("https://your-backend-url.onrender.com");
  
 
-### **3. CORS & Proxy Handling**  
+**3. CORS & Proxy Handling**  
 Ensure your Express backend allows the frontend URL:  
 ```js
 app.use(cors({ origin: "https://your-frontend.onrender.com" }));
@@ -187,7 +187,7 @@ app.use(cors({ origin: "https://your-frontend.onrender.com" }));
 
  
 
-## **🔑 Environment Variables**  
+**🔑 Environment Variables**  
 **`server/.env`**  
  env
 MONGODB_URI=your-mongodb-uri
@@ -197,7 +197,7 @@ JWT_SECRET=your-secret-key (if using auth)
 
  
 
-## **⚠ Troubleshooting**  
+**⚠ Troubleshooting**  
 🔹 **Socket.IO Connection Failing?**  
 - Check **CORS** settings in the backend.  
 - Ensure **WebSockets** are enabled in Render.  
@@ -208,9 +208,9 @@ JWT_SECRET=your-secret-key (if using auth)
 🔹 **Frontend Not Updating?**  
 - Clear cache or check `useEffect` dependencies in React.  
 
----
+ 
 
-## **🚀 Future Improvements**  
+**🚀 Future Improvements**  
 - [ ] **User Authentication** (JWT/OAuth)  
 - [ ] **Group Chats & Rooms**  
 - [ ] **Message Read Receipts**  
@@ -227,9 +227,11 @@ JWT_SECRET=your-secret-key (if using auth)
   ![image6](<Screenshot (104).png>)
    ![image7](<Screenshot (105).png>)
 
+**DEPLOYMENT**
+Backend Render URL: `https://plp-mern-wk-7-socketio-chat-render.onrender.com`
+FrontEnd Render URL: `https://plp-mern-wk-7-socketio-chat-render-b9o3.onrender.com`
 
-
-## **📜 License**  
+##📜 License 
 MIT © [j-captain](https://github.com/your-j-captain)  
 
  

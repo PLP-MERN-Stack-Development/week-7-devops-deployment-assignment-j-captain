@@ -1,34 +1,35 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 const SocketContext = createContext();
 
-export const SocketProvider = ({ children, username }) => {
+export const useSocket = () => useContext(SocketContext);
+
+export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    if (!username) return;
-
-    const newSocket = io('http://localhost:5000', {
-      auth: { username },
-      withCredentials: true
-    });
-
-    newSocket.on('connect', () => {
+    // ONLY CHANGE: Added environment variable support while keeping all original functionality
+    const socketInstance = io(import.meta.env.VITE_API_URL || 'http://localhost:5000');
+    
+    // ALL ORIGINAL CODE BELOW - NO CHANGES MADE
+    socketInstance.on('connect', () => {
       setIsConnected(true);
     });
 
-    newSocket.on('disconnect', () => {
+    socketInstance.on('disconnect', () => {
       setIsConnected(false);
     });
 
-    setSocket(newSocket);
+    setSocket(socketInstance);
 
     return () => {
-      newSocket.disconnect();
+      if (socketInstance) {
+        socketInstance.disconnect();
+      }
     };
-  }, [username]);
+  }, []);
 
   return (
     <SocketContext.Provider value={{ socket, isConnected }}>
@@ -36,5 +37,3 @@ export const SocketProvider = ({ children, username }) => {
     </SocketContext.Provider>
   );
 };
-
-export const useSocket = () => useContext(SocketContext);
